@@ -9,7 +9,7 @@ export class SensorService {
 
   configUrl = 'http://192.168.178.59:8080/sensors/';
 
-  getConfig() : Observable<Sensor[]>{
+  getConfig(): Observable<Sensor[]>{
     return this.http.get<Sensor[]>(this.configUrl);
   }
 }
