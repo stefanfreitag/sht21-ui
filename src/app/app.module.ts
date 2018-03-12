@@ -10,21 +10,26 @@ import {AgGridModule} from 'ag-grid-angular';
 import { MeasurementsComponent } from './measurements/measurements.component';
 import {MeasurementService} from './measurements/measurement.service';
 import {ChartModule} from 'angular-highcharts';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import {RouterModule, Routes} from '@angular/router';
+import {appRoutes} from './app.routes';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SensorsComponent,
+    HeaderComponent,
     MeasurementsComponent,
+    SensorsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ChartModule,
     HttpClientModule,
-    AgGridModule.withComponents([ ])
+    AgGridModule.withComponents([ ]),
+    RouterModule.forRoot(appRoutes, {enableTracing:true})
   ],
   providers: [MeasurementService, SensorService],
   bootstrap: [AppComponent]
