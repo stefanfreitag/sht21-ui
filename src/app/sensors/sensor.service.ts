@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class SensorService {
 
-  constructor(private http: HttpClient) { }
 
-  configUrl = 'http://192.168.178.59:8080/sensors/';
+  constructor(private http: HttpClient) {
+  }
 
-  getConfig(): Observable<Sensor[]>{
-    return this.http.get<Sensor[]>(this.configUrl);
+  getConfig(): Observable<Sensor[]> {
+    return this.http.get<Sensor[]>(environment.endpoint + '/sensors/');
   }
 }
