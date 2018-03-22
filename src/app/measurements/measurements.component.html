@@ -1,24 +1,40 @@
 <div class="container-fluid">
-  <h1>Measurements</h1>
-  <div class="input-group">
-  <div class="input-group mb-3">
-    <input type="text" [(ngModel)]="startDate" class="form-control" >
+  <h4>Sensor selection</h4>
+  <div class="container-fluid">
+    <p-dropdown [options]="sensors" [(ngModel)]="selectedSensor" [style]="{'width':'250px'}"
+                optionLabel="name"></p-dropdown>
   </div>
-  <div class="input-group mb-3">
-    <input type="text" [(ngModel)]="endDate" class="form-control">
-  </div>
+  <h4>Date range selection</h4>
+  <div class="container-fluid input-group">
+    <div class="input-group mb-3">
+      <p-calendar [(ngModel)]="startDate" showTime="true" hourFormat="24"></p-calendar>
+    </div>
+    <div class="input-group mb-3">
+      <p-calendar [(ngModel)]="endDate" showTime="true" hourFormat="24"></p-calendar>
+    </div>
 
-    <button id="btnFilter" class="btn-info" (click)="btnFilterClicked()">Filter</button>
-</div>
-  <div style='height: 100%'>
-  <ag-grid-angular style="width: 100%; height: 400px;" class="ag-theme-fresh"
-
-                   (gridReady)="onGridReady($event)"
-                   [rowData]="rowData"
-                   [enableSorting]="true"
-                   [columnDefs]="columnDefs">
-
-  </ag-grid-angular>
+    <div>
+    <button id="btnFilter" class="btn btn-info" (click)="btnLoadClicked()">Load</button>
+    </div>
   </div>
 </div>
-<div [chart]="chart"></div>
+
+
+<div class="container-fluid">
+  <h4>Measurements</h4>
+  <div class="container-fluid" style='height: 100%'>
+    <ag-grid-angular style="width: 100%; height: 400px;" class="ag-theme-fresh"
+
+                     (gridReady)="onGridReady($event)"
+                     [rowData]="rowData"
+                     [enableSorting]="true"
+                     [columnDefs]="columnDefs">
+
+    </ag-grid-angular>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <h4>Chart</h4>
+  <div [chart]="chart"></div>
+</div>

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MeasurementService} from './measurement.service';
 import {Chart} from 'angular-highcharts';
-import {ColDef} from 'ag-grid';
+import {ColDef, GridApi} from 'ag-grid';
 import {DateRendererComponent} from './DateRendererComponent';
 import * as subDays from 'date-fns/sub_days';
+import {SensorService} from '../sensors/sensor.service';
 
 @Component({
   selector: 'app-measurements',
@@ -13,12 +14,16 @@ import * as subDays from 'date-fns/sub_days';
 export class MeasurementsComponent implements OnInit {
 
 
+  sensors: Sensor[];
+  selectedSensor: Sensor;
+
+
   private sensorId: String = 'e16f9f6c-eb43-4ef7-b7be-48a3653028c9';
-  private gridApi;
+  private gridApi: GridApi;
   private gridColumnApi;
 
-  startDate: number;
-  endDate: number;
+  startDate: Date;
+  endDate: Date;
 
   private rowData: Measurement[] = [];
 
@@ -31,12 +36,13 @@ export class MeasurementsComponent implements OnInit {
 
   private chart: Chart;
 
-  constructor(private service: MeasurementService) {
-    this.endDate = new Date().getTime();
-    this.startDate = subDays(this.endDate, 1).getTime();
+  constructor(private sensorService: SensorService, private measurementService: MeasurementService) {
+    this.endDate = new Date();
+    this.startDate = subDays(this.endDate, 1);
     this.chart = new Chart({
       chart: {
-        type: 'line'
+        type: 'line',
+        zoomType: 'x'
       },
       xAxis: {
         type: 'datetime',
@@ -46,6 +52,7 @@ export class MeasurementsComponent implements OnInit {
         }
       },
       yAxis: {
+        min: 0,
         type : 'linear',
         title: {
           text: 'Temperature'
@@ -57,11 +64,13 @@ export class MeasurementsComponent implements OnInit {
 
 
   ngOnInit() {
+
+
     //503bdf5d-fef6-4cfb-9602-bb2d30e4d836
-    this.service.getMeasurements('e16f9f6c-eb43-4ef7-b7be-48a3653028c9')
-      .subscribe(data => {
-        this.rowData = data;
-      });
+//    this.measurementService.getMeasurements('e16f9f6c-eb43-4ef7-b7be-48a3653028c9')
+//      .subscribe(data => {
+//        this.rowData = data;
+//      });
   }
 
   private refreshChart() {
@@ -69,8 +78,9 @@ export class MeasurementsComponent implements OnInit {
     for (const d of this.rowData) {
       values.push([d.measuredAt, d.value]);
     }
-    while(this.chart.ref.series.length > 0)
+    while (this.chart.ref.series.length > 0) {
       this.chart.ref.series[0].remove(true);
+    }
     this.chart.addSerie({name: 'Temperature', id: '1'});
     this.chart.ref.series[0].setData(values);
 
@@ -81,17 +91,28 @@ export class MeasurementsComponent implements OnInit {
     this.gridColumnApi = params.columnApi;
     params.api.setRowData(this.rowData);
     params.api.sizeColumnsToFit();
+    this.refreshSensors();
     this.refreshChart();
   }
 
-  btnFilterClicked() {
+  btnLoadClicked() {
     console.log(this.startDate);
-    console.log(this.endDate)
-    this.service.getMeasurementsForIntervall(this.sensorId, this.startDate, this.endDate)
+    console.log(this.endDate);
+    this.measurementService.getMeasurementsForIntervall(this.sensorId, this.startDate.getTime(), this.endDate.getTime())
       .subscribe(data => {
         this.rowData = data;
         console.log('Finished fetching of ' + data.length + ' elements.');
         this.refreshChart();
       });
+  }
+
+  private refreshSensors() {
+    console.log('Refreshing sensor information');
+    this.sensorService.getSensors()
+      .subscribe(data => {
+        this.sensors = data;
+        console.log('Sensors: ' + this.sensors.toString());
+      });
+
   }
 }

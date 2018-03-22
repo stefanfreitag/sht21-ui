@@ -16,10 +16,7 @@ export class SensorsComponent implements OnInit {
   columnDefs: ColDef[] = [
     {headerName: 'Identifier', field: 'uuid'},
     {headerName: 'Name', field: 'name'},
-    {headerName: 'Description', field: 'description'},
-    //{headerName: 'Measurements', cellRenderer: function(params) {
-  //    return '<a href="http://localhost:8080/sensors"+ 3 +"/measurements/" target="_blank">params</a>';
-    //   }}
+    {headerName: 'Description', field: 'description'}
   ];
 
   constructor(private service: SensorService) {
@@ -35,7 +32,7 @@ export class SensorsComponent implements OnInit {
     this.gridColumnApi = params.columnApi;
 
 
-    this.service.getConfig()
+    this.service.getSensors()
       .subscribe(data => {
         console.log(data);
         params.api.setRowData(data);

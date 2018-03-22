@@ -22,7 +22,9 @@
         "styles.css",
         "../node_modules/ag-grid/dist/styles/ag-grid.css",
         "../node_modules/ag-grid/dist/styles/ag-theme-fresh.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/primeng/resources/primeng.css",
+        "../node_modules/primeng/resources/themes/bootstrap/theme.css"
 
       ],
       "scripts": [],

@@ -10,7 +10,7 @@ export class SensorService {
   constructor(private http: HttpClient) {
   }
 
-  getConfig(): Observable<Sensor[]> {
+  getSensors(): Observable<Sensor[]> {
     return this.http.get<Sensor[]>(environment.endpoint + '/sensors/');
   }
 }
