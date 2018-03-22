@@ -14,22 +14,28 @@ import {FormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import {RouterModule, Routes} from '@angular/router';
 import {appRoutes} from './app.routes';
+import {DateRendererComponent} from "./measurements/DateRendererComponent";
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    DateRendererComponent,
     HeaderComponent,
     MeasurementsComponent,
     SensorsComponent
   ],
+  entryComponents: [
+DateRendererComponent
+],
   imports: [
     BrowserModule,
     FormsModule,
     ChartModule,
+
     HttpClientModule,
     AgGridModule.withComponents([ ]),
-    RouterModule.forRoot(appRoutes, {enableTracing:true})
+    RouterModule.forRoot(appRoutes, {enableTracing:false})
   ],
   providers: [MeasurementService, SensorService],
   bootstrap: [AppComponent]

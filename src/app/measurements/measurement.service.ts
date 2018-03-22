@@ -1,16 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class MeasurementService {
 
-  configUrl = 'http://localhost:8080/sensors/e16f9f6c-eb43-4ef7-b7be-48a3653028c9/measurements/';
-
-  constructor(private http: HttpClient) { }
-
-  getMeasurements(): Observable<Measurement[]> {
-    return this.http.get<Measurement[]>(this.configUrl);
+  constructor(private http: HttpClient) {
   }
+
+  getMeasurements(sensorUuid: String): Observable<Measurement[]> {
+    return this.http.get<Measurement[]>(environment.endpoint + '/sensors/' + sensorUuid + '/measurements');
+  }
+
+  getMeasurementsForIntervall(sensorUuid: String, startDate: number, endDate: number): Observable<Measurement[]> {
+    console.log('Start Date' + startDate);
+    return this.http.get<Measurement[]>(environment.endpoint + '/sensors/' + sensorUuid + '/measurements' + '/?from=' + startDate + '&to=' + endDate);
+  }
+
 
 }

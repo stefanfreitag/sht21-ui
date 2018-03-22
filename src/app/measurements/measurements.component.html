@@ -1,6 +1,15 @@
 <div class="container-fluid">
   <h1>Measurements</h1>
+  <div class="input-group">
+  <div class="input-group mb-3">
+    <input type="text" [(ngModel)]="startDate" class="form-control" >
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" [(ngModel)]="endDate" class="form-control">
+  </div>
 
+    <button id="btnFilter" class="btn-info" (click)="btnFilterClicked()">Filter</button>
+</div>
   <div style='height: 100%'>
   <ag-grid-angular style="width: 100%; height: 400px;" class="ag-theme-fresh"
 

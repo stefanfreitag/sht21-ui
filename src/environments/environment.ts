@@ -6,4 +6,5 @@
 export const environment = {
   production: false,
   endpoint : 'http://192.168.178.29:8080'
+  //endpoint : 'http://localhost:8080'
 };
