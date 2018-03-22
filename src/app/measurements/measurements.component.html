@@ -1,22 +1,35 @@
 <div class="container-fluid">
-  <h4>Sensor selection</h4>
-  <div class="container-fluid">
-    <p-dropdown [options]="sensors" [(ngModel)]="selectedSensor" [style]="{'width':'250px'}"
-                optionLabel="name"></p-dropdown>
-  </div>
-  <h4>Date range selection</h4>
-  <div class="container-fluid input-group">
-    <div class="input-group mb-3">
-      <p-calendar [(ngModel)]="startDate" showTime="true" hourFormat="24"></p-calendar>
-    </div>
-    <div class="input-group mb-3">
-      <p-calendar [(ngModel)]="endDate" showTime="true" hourFormat="24"></p-calendar>
+  <div class="row">
+
+    <div class="col-sm-6">
+      <h4>Sensor selection</h4>
+      <div class="container-fluid">
+        <p-dropdown [options]="sensors" [(ngModel)]="selectedSensor" [style]="{'width':'250px'}"
+                    optionLabel="name"></p-dropdown>
+      </div>
     </div>
 
-    <div>
-    <button id="btnFilter" class="btn btn-info" (click)="btnLoadClicked()">Load</button>
+    <div class="col-sm-6">
+      <h4>Date range selection</h4>
+      <div class="container-fluid input-group">
+        <div class="input-group mb-3">
+          <span class="label label-default">Start date/ time: </span>
+          <p-calendar [(ngModel)]="startDate" showTime="true" hourFormat="24"></p-calendar>
+        </div>
+        <div class="input-group mb-3">
+          <span class="label label-default">End date/ time: </span>
+          <p-calendar [(ngModel)]="endDate" showTime="true" hourFormat="24"></p-calendar>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button id="btnFilter" class="btn btn-info" (click)="btnLoadClicked()">Load</button>
+    </div>
+  </div>
+
 </div>
 
 

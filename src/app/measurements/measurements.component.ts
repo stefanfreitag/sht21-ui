@@ -17,13 +17,19 @@ export class MeasurementsComponent implements OnInit {
   sensors: Sensor[];
   selectedSensor: Sensor;
 
-
-  private sensorId: String = 'e16f9f6c-eb43-4ef7-b7be-48a3653028c9';
   private gridApi: GridApi;
   private gridColumnApi;
 
+  /**
+   * Start date for reading sensor measurements from backend.
+   */
   startDate: Date;
+  /**
+   * End date for reading sensor measurements from backend.
+   */
   endDate: Date;
+
+  defaultDateOffset = 1;
 
   private rowData: Measurement[] = [];
 
@@ -36,9 +42,10 @@ export class MeasurementsComponent implements OnInit {
 
   private chart: Chart;
 
+
   constructor(private sensorService: SensorService, private measurementService: MeasurementService) {
     this.endDate = new Date();
-    this.startDate = subDays(this.endDate, 1);
+    this.startDate = subDays(this.endDate, this.defaultDateOffset);
     this.chart = new Chart({
       chart: {
         type: 'line',
@@ -53,7 +60,7 @@ export class MeasurementsComponent implements OnInit {
       },
       yAxis: {
         min: 0,
-        type : 'linear',
+        type: 'linear',
         title: {
           text: 'Temperature'
         }
@@ -96,9 +103,7 @@ export class MeasurementsComponent implements OnInit {
   }
 
   btnLoadClicked() {
-    console.log(this.startDate);
-    console.log(this.endDate);
-    this.measurementService.getMeasurementsForIntervall(this.sensorId, this.startDate.getTime(), this.endDate.getTime())
+    this.measurementService.getMeasurementsForIntervall(this.selectedSensor.uuid, this.startDate.getTime(), this.endDate.getTime())
       .subscribe(data => {
         this.rowData = data;
         console.log('Finished fetching of ' + data.length + ' elements.');
@@ -115,4 +120,5 @@ export class MeasurementsComponent implements OnInit {
       });
 
   }
+
 }
