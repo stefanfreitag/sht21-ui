@@ -31,16 +31,15 @@ export class MeasurementsComponent implements OnInit {
 
   defaultDateOffset = 1;
 
-  private rowData: Measurement[] = [];
+  rowData: Measurement[] = [];
 
-
-  private columnDefs: ColDef[] = [
+  columnDefs: ColDef[] = [
     {headerName: 'Measured At', field: 'measuredAt', cellRendererFramework: DateRendererComponent},
     {headerName: 'Value', field: 'value'},
     {headerName: 'Unit', field: 'unit'}
   ];
 
-  private chart: Chart;
+  chart: Chart;
 
 
   constructor(private sensorService: SensorService, private measurementService: MeasurementService) {
