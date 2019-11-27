@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MeasurementService} from './measurement.service';
 import {Chart} from 'angular-highcharts';
-import {ColDef, GridApi} from 'ag-grid';
+import {ColDef, GridApi} from '@ag-grid-community/all-modules';
 import {DateRendererComponent} from './DateRendererComponent';
-import * as subDays from 'date-fns/sub_days';
+import subDays from 'date-fns/subDays';
 import {SensorService} from '../sensors/sensor.service';
 
 @Component({
@@ -72,7 +72,7 @@ export class MeasurementsComponent implements OnInit {
   ngOnInit() {
 
 
-    //503bdf5d-fef6-4cfb-9602-bb2d30e4d836
+    // 503bdf5d-fef6-4cfb-9602-bb2d30e4d836
 //    this.measurementService.getMeasurements('e16f9f6c-eb43-4ef7-b7be-48a3653028c9')
 //      .subscribe(data => {
 //        this.rowData = data;
@@ -87,7 +87,7 @@ export class MeasurementsComponent implements OnInit {
     while (this.chart.ref.series.length > 0) {
       this.chart.ref.series[0].remove(true);
     }
-    this.chart.addSerie({name: 'Temperature', id: '1'});
+    // this.chart.addSeries({name: 'Temperature', id: '1'});
     this.chart.ref.series[0].setData(values);
 
   }

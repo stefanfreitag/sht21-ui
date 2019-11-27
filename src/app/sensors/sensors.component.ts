@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SensorService} from './sensor.service';
-import {ColDef} from 'ag-grid';
+import {ColDef} from '@ag-grid-community/all-modules';
 
 @Component({
   selector: 'app-sensors',

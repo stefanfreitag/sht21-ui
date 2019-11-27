@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {AgRendererComponent} from 'ag-grid-angular/main';
+import {AgRendererComponent} from '@ag-grid-community/angular';
 
-import * as format from 'date-fns/format';
-import * as deLocale from 'date-fns/locale/de/index.js';
+import format from 'date-fns/format';
+//import * as deLocale from 'date-fns/locale/de/index.js';
 
 
 @Component({
@@ -17,8 +17,8 @@ export class DateRendererComponent implements AgRendererComponent {
   agInit(params: any): void {
     this.params = params;
 
-   this.formattedString = format(params.value, 'dddd, DD MMMM HH:mm:ss', {locale: deLocale});
-
+   // this.formattedString = format(params.value, 'dddd, DD MMMM HH:mm:ss', {locale: deLocale});
+    this.formattedString = format(params.value, 'dddd, DD MMMM HH:mm:ss');
   }
 
   refresh(params: any): boolean {

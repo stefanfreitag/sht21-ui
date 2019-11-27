@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {SensorsComponent} from './sensors/sensors.component';
 import {HttpClientModule} from '@angular/common/http';
 import {SensorService} from './sensors/sensor.service';
-import {AgGridModule} from 'ag-grid-angular';
+import {AgGridModule} from '@ag-grid-community/angular';
 import {MeasurementsComponent} from './measurements/measurements.component';
 import {MeasurementService} from './measurements/measurement.service';
 import {ChartModule} from 'angular-highcharts';
