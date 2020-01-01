@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {MeasurementService} from './measurement.service';
 import {Chart} from 'angular-highcharts';
-import {ColDef, GridApi} from '@ag-grid-community/all-modules';
+import {ColDef, GridApi, Module} from '@ag-grid-community/all-modules';
 import {DateRendererComponent} from './DateRendererComponent';
 import subDays from 'date-fns/subDays';
 import {SensorService} from '../sensors/sensor.service';
+
+import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
+import {SeriesOptionsType} from 'highcharts';
 
 @Component({
   selector: 'app-measurements',
@@ -13,6 +16,7 @@ import {SensorService} from '../sensors/sensor.service';
 })
 export class MeasurementsComponent implements OnInit {
 
+  modules: Module[] = [ClientSideRowModelModule];
 
   sensors: Sensor[];
   selectedSensor: Sensor;
@@ -87,7 +91,7 @@ export class MeasurementsComponent implements OnInit {
     while (this.chart.ref.series.length > 0) {
       this.chart.ref.series[0].remove(true);
     }
-    // this.chart.addSeries({name: 'Temperature', id: '1'});
+     this.chart.addSeries({name: 'Temperature', id: '1', type:'line'}, false, false);
     this.chart.ref.series[0].setData(values);
 
   }
@@ -102,6 +106,7 @@ export class MeasurementsComponent implements OnInit {
   }
 
   btnLoadClicked() {
+    console.log('Selected sensor' + this.selectedSensor);
     this.measurementService.getMeasurementsForIntervall(this.selectedSensor.uuid, this.startDate.getTime(), this.endDate.getTime())
       .subscribe(data => {
         this.rowData = data;
@@ -116,6 +121,7 @@ export class MeasurementsComponent implements OnInit {
       .subscribe(data => {
         this.sensors = data;
         console.log('Sensors: ' + this.sensors.toString());
+        this.selectedSensor = this.sensors[0];
       });
 
   }

@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {SensorService} from './sensor.service';
-import {ColDef} from '@ag-grid-community/all-modules';
+import {ColDef, Module} from '@ag-grid-community/all-modules';
+import {AllCommunityModules} from '@ag-grid-community/all-modules';
+
+import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
 
 @Component({
   selector: 'app-sensors',
@@ -12,9 +15,11 @@ export class SensorsComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
 
+  modules: Module[] = [ClientSideRowModelModule];
+
   rowData: Sensor[];
   columnDefs: ColDef[] = [
-    {headerName: 'Identifier', field: 'uuid'},
+    {headerName: 'UID', field: 'uuid'},
     {headerName: 'Name', field: 'name'},
     {headerName: 'Description', field: 'description'}
   ];
@@ -23,6 +28,10 @@ export class SensorsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.service.getSensors()
+      .subscribe(data => {
+        console.log(data);
+      });
 
   }
 
@@ -36,7 +45,7 @@ export class SensorsComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         params.api.setRowData(data);
-      });
+      },error => console.log(error));
 
     params.api.sizeColumnsToFit();
 
