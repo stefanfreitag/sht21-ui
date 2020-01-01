@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {SensorService} from './sensors/sensor.service';
 
 @Component({
   selector: 'app-root',
