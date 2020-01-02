@@ -38,7 +38,7 @@ export class MeasurementsComponent implements OnInit {
   rowData: Measurement[] = [];
 
   columnDefs: ColDef[] = [
-    {headerName: 'Measured At', field: 'measuredAt', cellRendererFramework: DateRendererComponent},
+    {headerName: 'Measured At', field: 'measuredAt', cellRendererFramework: DateRendererComponent, sortable: true},
     {headerName: 'Value', field: 'value'},
     {headerName: 'Unit', field: 'unit'}
   ];
