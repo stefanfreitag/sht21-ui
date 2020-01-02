@@ -19,9 +19,9 @@ export class SensorsComponent implements OnInit {
 
   rowData: Sensor[];
   columnDefs: ColDef[] = [
-    {headerName: 'UID', field: 'uuid'},
-    {headerName: 'Name', field: 'name'},
-    {headerName: 'Description', field: 'description'}
+    {headerName: 'UID', field: 'uuid', sortable: true},
+    {headerName: 'Name', field: 'name', sortable: true},
+    {headerName: 'Description', field: 'description', sortable: true}
   ];
 
   constructor(private service: SensorService) {
