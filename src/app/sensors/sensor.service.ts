@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import {Injectable} from '@angular/core'
+import {Observable} from 'rxjs'
+import {HttpClient} from '@angular/common/http'
+import { environment } from '../../environments/environment'
 
 @Injectable()
 export class SensorService {
@@ -11,6 +11,6 @@ export class SensorService {
   }
 
   getSensors(): Observable<Sensor[]> {
-    return this.http.get<Sensor[]>(environment.endpoint + '/sensors/');
+    return this.http.get<Sensor[]>(environment.endpoint + '/sensors/')
   }
 }

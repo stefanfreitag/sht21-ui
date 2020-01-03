@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {MeasurementService} from './measurement.service';
-import {Chart} from 'angular-highcharts';
-import {ColDef, GridApi, Module} from '@ag-grid-community/all-modules';
-import {DateRendererComponent} from './DateRendererComponent';
-import subDays from 'date-fns/subDays';
-import {SensorService} from '../sensors/sensor.service';
+import {Component, OnInit} from '@angular/core'
+import {MeasurementService} from './measurement.service'
+import {Chart} from 'angular-highcharts'
+import {ColDef, GridApi, Module} from '@ag-grid-community/all-modules'
+import {DateRendererComponent} from './DateRendererComponent'
+import subDays from 'date-fns/subDays'
+import {SensorService} from '../sensors/sensor.service'
 
-import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model';
-import {SeriesOptionsType} from 'highcharts';
+import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
+import {SeriesOptionsType} from 'highcharts'
 
 @Component({
   selector: 'app-measurements',
@@ -16,39 +16,39 @@ import {SeriesOptionsType} from 'highcharts';
 })
 export class MeasurementsComponent implements OnInit {
 
-  modules: Module[] = [ClientSideRowModelModule];
+  modules: Module[] = [ClientSideRowModelModule]
 
-  sensors: Sensor[];
-  selectedSensor: Sensor;
+  sensors: Sensor[]
+  selectedSensor: Sensor
 
-  private gridApi: GridApi;
-  private gridColumnApi;
+  private gridApi: GridApi
+  private gridColumnApi
 
   /**
    * Start date for reading sensor measurements from backend.
    */
-  startDate: Date;
+  startDate: Date
   /**
    * End date for reading sensor measurements from backend.
    */
-  endDate: Date;
+  endDate: Date
 
-  defaultDateOffset = 1;
+  defaultDateOffset = 1
 
-  rowData: Measurement[] = [];
+  rowData: Measurement[] = []
 
   columnDefs: ColDef[] = [
     {headerName: 'Measured At', field: 'measuredAt', cellRendererFramework: DateRendererComponent, sortable: true},
     {headerName: 'Value', field: 'value'},
     {headerName: 'Unit', field: 'unit'}
-  ];
+  ]
 
-  chart: Chart;
+  chart: Chart
 
 
   constructor(private sensorService: SensorService, private measurementService: MeasurementService) {
-    this.endDate = new Date();
-    this.startDate = subDays(this.endDate, this.defaultDateOffset);
+    this.endDate = new Date()
+    this.startDate = subDays(this.endDate, this.defaultDateOffset)
     this.chart = new Chart({
       chart: {
         type: 'line',
@@ -68,7 +68,7 @@ export class MeasurementsComponent implements OnInit {
           text: 'Temperature'
         }
       }
-    });
+    })
 
   }
 
@@ -84,45 +84,41 @@ export class MeasurementsComponent implements OnInit {
   }
 
   private refreshChart() {
-    const values: any[] = [];
+    const values: any[] = []
     for (const d of this.rowData) {
-      values.push([d.measuredAt, d.value]);
+      values.push([d.measuredAt, d.value])
     }
     while (this.chart.ref.series.length > 0) {
-      this.chart.ref.series[0].remove(true);
+      this.chart.ref.series[0].remove(true)
     }
-     this.chart.addSeries({name: 'Temperature', id: '1', type:'line'}, false, false);
-    this.chart.ref.series[0].setData(values);
+     this.chart.addSeries({name: 'Temperature', id: '1', type: 'line'}, false, false)
+    this.chart.ref.series[0].setData(values)
 
   }
 
   onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    params.api.setRowData(this.rowData);
-    params.api.sizeColumnsToFit();
-    this.refreshSensors();
-    this.refreshChart();
+    this.gridApi = params.api
+    this.gridColumnApi = params.columnApi
+    params.api.setRowData(this.rowData)
+    params.api.sizeColumnsToFit()
+    this.refreshSensors()
+    this.refreshChart()
   }
 
   btnLoadClicked() {
-    console.log('Selected sensor' + this.selectedSensor);
     this.measurementService.getMeasurementsForIntervall(this.selectedSensor.uuid, this.startDate.getTime(), this.endDate.getTime())
       .subscribe(data => {
-        this.rowData = data;
-        console.log('Finished fetching of ' + data.length + ' elements.');
-        this.refreshChart();
-      });
+        this.rowData = data
+        this.refreshChart()
+      })
   }
 
   private refreshSensors() {
-    console.log('Refreshing sensor information');
     this.sensorService.getSensors()
       .subscribe(data => {
-        this.sensors = data;
-        console.log('Sensors: ' + this.sensors.toString());
-        this.selectedSensor = this.sensors[0];
-      });
+        this.sensors = data
+        this.selectedSensor = this.sensors[0]
+      })
 
   }
 
