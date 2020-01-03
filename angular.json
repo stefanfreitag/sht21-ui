@@ -26,7 +26,7 @@
               "node_modules/@ag-grid-community/all-modules/dist/styles/ag-theme-balham-dark.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/primeng/resources/primeng.css",
-              "node_modules/primeng/resources/themes/rhea/theme.css"
+              "node_modules/primeng/resources/themes/nova-dark/theme.css"
             ],
             "scripts": []
           },
@@ -81,7 +81,7 @@
               "node_modules/ag-grid/dist/styles/ag-theme-balham-dark.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/primeng/resources/primeng.css",
-              "node_modules/primeng/resources/themes/rhea/theme.css"
+              "node_modules/primeng/resources/themes/nova-dark/theme.css"
             ],
             "assets": [
               "src/assets",
