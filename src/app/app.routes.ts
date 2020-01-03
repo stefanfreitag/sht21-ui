@@ -4,7 +4,6 @@ import {MeasurementsComponent} from './measurements/measurements.component';
 
 export const appRoutes: Routes = [
   { path: 'sensors', component: SensorsComponent },
-  { path: 'measurements',      component: MeasurementsComponent }
-
-  // { path: '**', component: PageNotFoundComponent }
+  { path: 'measurements',      component: MeasurementsComponent },
+  { path: '', component: SensorsComponent },
 ];
