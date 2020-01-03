@@ -106,21 +106,17 @@ export class MeasurementsComponent implements OnInit {
   }
 
   btnLoadClicked() {
-    console.log('Selected sensor' + this.selectedSensor)
     this.measurementService.getMeasurementsForIntervall(this.selectedSensor.uuid, this.startDate.getTime(), this.endDate.getTime())
       .subscribe(data => {
         this.rowData = data
-        console.log('Finished fetching of ' + data.length + ' elements.')
         this.refreshChart()
       })
   }
 
   private refreshSensors() {
-    console.log('Refreshing sensor information')
     this.sensorService.getSensors()
       .subscribe(data => {
         this.sensors = data
-        console.log('Sensors: ' + this.sensors.toString())
         this.selectedSensor = this.sensors[0]
       })
 
