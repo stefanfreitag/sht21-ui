@@ -14,7 +14,7 @@ import * as uuid from 'uuid';
 	styleUrls: ['./add-sensor.component.css']
 })
 export class AddSensorComponent {
-	private createSensorForm: FormGroup;
+	createSensorForm: FormGroup;
 
 	constructor(
 		private service: SensorService,
