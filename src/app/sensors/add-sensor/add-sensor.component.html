@@ -1,0 +1,20 @@
+<h1>Register a new sensor</h1>
+<form>
+<div [formGroup]="createSensorForm">
+<label>
+  Name:
+  <input type="text" formControlName="name">
+</label>
+
+<label>
+  Description:
+  <input type="text" formControlName="description">
+</label>
+
+<p-button class="btn-primary" label="Save"  type="submit" (onClick)="saveSensor()"></p-button>
+<p-button class="btn-danger" label="Cancel" routerLink="/"></p-button>
+</div>
+
+  <p-toast position="top-left"></p-toast>
+</form>
+

@@ -1,6 +1,5 @@
 interface Sensor {
-
-  uuid: string;
-  name: string;
-  description: string;
+	uuid: string;
+	name: string;
+	description: string;
 }

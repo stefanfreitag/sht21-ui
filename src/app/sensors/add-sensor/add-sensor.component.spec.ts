@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SensorsComponent } from './sensors.component';
+import { AddSensorComponent } from './add-sensor.component';
 
-describe('SensorsComponent', () => {
-	let component: SensorsComponent;
-	let fixture: ComponentFixture<SensorsComponent>;
+describe('AddSensorComponent', () => {
+	let component: AddSensorComponent;
+	let fixture: ComponentFixture<AddSensorComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [SensorsComponent]
+			declarations: [AddSensorComponent]
 		}).compileComponents();
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(SensorsComponent);
+		fixture = TestBed.createComponent(AddSensorComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

@@ -1,6 +1,9 @@
 <div class="container-fluid">
   <h1>Registered Sensors</h1>
-
+<div id="sensorActions" class="">
+  <p-button class="ui-button-info" routerLink="/sensors/create" label="Create"></p-button>
+  <p-button class="ui-button-secondary" disabled="true" label="Edit"></p-button>
+</div>
   <ag-grid-angular style="width: 100%; height: 400px;" class="ag-theme-balham-dark"
                    [rowData]="rowData"
                    rowSelection="multiple"
