@@ -14,18 +14,14 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { DateRendererComponent } from './measurements/DateRendererComponent';
-import {
-	ButtonModule,
-	CalendarModule,
-	DialogModule,
-	DropdownModule,
-	MessageModule,
-	MessageService,
-	MessagesModule
-} from 'primeng/primeng';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddSensorComponent } from './sensors/add-sensor/add-sensor.component';
-import { ToastModule } from 'primeng/toast';
+import {
+	MatButtonModule,
+	MatFormFieldModule,
+	MatInputModule,
+	MatSelectModule
+} from '@angular/material';
 
 @NgModule({
 	declarations: [
@@ -42,19 +38,16 @@ import { ToastModule } from 'primeng/toast';
 		BrowserAnimationsModule,
 		FormsModule,
 		ReactiveFormsModule,
-		ButtonModule,
-		CalendarModule,
 		ChartModule,
-		DialogModule,
-		DropdownModule,
 		HttpClientModule,
-		ToastModule,
-		MessagesModule,
-		MessageModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatSelectModule,
 		AgGridModule.withComponents([]),
 		RouterModule.forRoot(appRoutes)
 	],
-	providers: [MeasurementService, SensorService, MessageService],
+	providers: [MeasurementService, SensorService],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}
