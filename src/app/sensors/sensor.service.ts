@@ -2,14 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { MessageService } from 'primeng/api';
 
 @Injectable()
 export class SensorService {
-	constructor(
-		private http: HttpClient,
-		private messageService: MessageService
-	) {}
+	constructor(private http: HttpClient) {}
 
 	getSensors(): Observable<Sensor[]> {
 		return this.http.get<Sensor[]>(environment.endpoint + '/sensors/');
@@ -20,13 +16,7 @@ export class SensorService {
 			value => {
 				console.log(value);
 			},
-			error => {
-				this.messageService.add({
-					severity: 'error',
-					summary: 'Error registering sensor',
-					detail: error
-				});
-			}
+			error => {}
 		);
 	}
 }

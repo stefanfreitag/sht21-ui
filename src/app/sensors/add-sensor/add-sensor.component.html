@@ -1,20 +1,17 @@
 <h1>Register a new sensor</h1>
 <form>
-<div [formGroup]="createSensorForm">
-<label>
-  Name:
-  <input type="text" formControlName="name">
-</label>
+  <div [formGroup]="createSensorForm" class="form-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="Description" formControlName="description">
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit" (click)="saveSensor()">Save</button>
+    <button mat-flat-button color="warn" routerLink="/">Cancel</button>
+  </div>
 
-<label>
-  Description:
-  <input type="text" formControlName="description">
-</label>
-
-<p-button class="btn-primary" label="Save"  type="submit" (onClick)="saveSensor()"></p-button>
-<p-button class="btn-danger" label="Cancel" routerLink="/"></p-button>
-</div>
-
-  <p-toast position="top-left"></p-toast>
 </form>
 
